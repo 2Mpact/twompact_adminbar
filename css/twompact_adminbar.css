@@ -1,0 +1,186 @@
+/** ADMIN BLOK CSS **/
+#admin_blok
+{
+    width: 800px;
+}
+
+    .admin_blok_left,
+    .admin_blok_right
+    {
+        float:left;
+    }
+
+    .admin_blok_left
+    {
+        width:60%;
+    }
+
+    .admin_blok_right
+    {
+        width:40%;
+    }
+
+    .twompact_adminbar_tab.right {
+        float:right;
+    }
+
+        .twompact_adminbar_tab.right span.twompact_adminbar_node_info {
+            margin-right: 10px;
+        }
+
+        .twompact_adminbar_tab.right
+        {
+            cursor:default;
+        }
+
+        .twompact_adminbar_tab.right a
+        {
+            cursor:pointer;
+            margin: 0;
+            padding: 0;
+            display: inline;
+        }
+
+#block-twompact-adminbar-admin-blok .contextual-links-wrapper {
+    display: none;
+}
+
+.twompact_adminbar_admin_blok {
+	border: 7px solid #457DA8;
+}
+
+.twompact_adminbar_admin_blok .nav-tabs {
+	border-bottom: none;
+	margin-bottom: 0;
+	height: 36px;
+}
+
+.twompact_adminbar_admin_blok .nav-tabs a {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	color: #393839;
+	background: #fff;
+	text-transform: none;
+	text-decoration: none;
+	margin: 0;
+	border: none;
+	border-radius: 0;
+	-webkit-transition: 500ms linear;
+  -moz-transition: 500ms linear;
+  -o-transition: 500ms linear;
+  -ms-transition: 500ms linear;
+  transition: 500ms linear;
+}
+
+.twompact_adminbar_admin_blok .nav-tabs a:hover {
+	border: none;
+	background: #457DA8;
+	color: #fff;
+	-webkit-transition: 500ms linear;
+  -moz-transition: 500ms linear;
+  -o-transition: 500ms linear;
+  -ms-transition: 500ms linear;
+  transition: 500ms linear;
+}
+
+.twompact_adminbar_admin_blok .nav-tabs li.active a,
+.twompact_adminbar_admin_blok .nav-tabs li.active a:hover,
+.twompact_adminbar_admin_blok .nav-tabs li.active a:focus {
+	color: #fff;
+	cursor: default;
+	background-color: #457DA8;
+	border: none;
+}
+
+.twompact_adminbar_admin_blok .twompact_adminbar_tab.right {
+	height: 36px;
+	line-height: 30px;
+	padding: 5px;
+}
+
+.twompact_adminbar_admin_blok .twompact_adminbar_tab.right {
+	font-family: 'Lato', Arial, sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	color: #aaa;
+	text-transform: none;
+	text-decoration: none;
+}
+
+.twompact_adminbar_admin_blok .twompact_adminbar_tab.right span.glyphicon-log-out {
+	color: #457DA8;
+}
+
+.twompact_adminbar_tab_data {
+	border-top: 2px solid #457DA8;
+	padding: 15px;
+}
+
+#twompact_adminbar_page_info_left,
+#twompact_adminbar_page_info_right,
+.twompact_adminbar_site_admin_left,
+.twompact_adminbar_site_admin_right {
+	padding: 0;
+}
+
+#twompact_adminbar_page_info_left,
+.twompact_adminbar_site_admin_left {
+	padding-right: 15px;
+}
+
+#twompact_adminbar_page_info_right,
+.twompact_adminbar_site_admin_right {
+	padding-left: 15px;
+}
+
+.twompact_adminbar_tab_data .nav-pills a {
+	border-radius: 0;
+	font-size: 13px;
+	padding: 5px !important;
+	border: none;
+	font-family: 'Lato', Arial, sans-serif;
+	font-size: 13px;
+	font-weight: 400;
+	text-transform: none;
+	text-decoration: none;
+	color: #003333;
+}
+
+.twompact_adminbar_admin_blok .btn {
+	background-image: none !important;
+	border: none !important;
+	border-radius: 0 !important;
+	-webkit-user-select: none !important;
+	-moz-user-select: none !important;
+	-ms-user-select: none !important;
+	-o-user-select: none !important;
+	user-select: none !important;
+	text-align: left !important;
+	font-size: 13px !important;
+	padding: 3px 6px !important;
+	text-decoration: none !important;
+	line-height: 20px !important;
+}
+
+.twompact_adminbar_tab_data .btn:active,
+.twompact_adminbar_tab_data .btn:hover,
+.twompact_adminbar_tab_data .btn:focus {
+	box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	border: none !important;
+}
+
+ul.node_add_links {
+	margin: 0;
+	padding: 15px;
+	margin-left: 15px;
+}
+
+li.node_add_link a {
+	font-size: 13px;
+	line-height: 20px;
+	color: #003333;
+}
+/** EINDE ADMIN BLOK CSS **/
+

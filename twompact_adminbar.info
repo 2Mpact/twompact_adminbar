@@ -1,0 +1,8 @@
+name = twompact_adminbar
+description = Custom adminbar on drupal 7
+core = 7.x
+package = 2Mpact
+
+files[] = twompact_adminbar.module
+scripts[] = js/twompact_adminbar.js
+stylesheets[all][] = css/twompact_adminbar.css

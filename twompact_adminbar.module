@@ -1,0 +1,348 @@
+<?php
+/**
+ * @file
+ * Code for the twompact_custom module.
+ */
+
+/**
+ * Implements hook_block_info().
+ */
+function twompact_adminbar_block_info() {
+  $blocks['admin_blok'] = array(
+    'info' => 'Beheerder blok',
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function twompact_adminbar_block_view($delta = '') {
+  switch($delta) {
+    case 'admin_blok':
+      $block = array(
+        'subject' => '',
+        'content' => twompact_adminbar_admin_blok(),
+      );
+      break;
+  }
+
+  return $block;
+}
+
+function twompact_adminbar_admin_blok() {
+  // init
+  $content_types = node_type_get_types(); // array met alle gegevens van de content types
+  $ga_block_page = module_invoke('google_analytics_reports', 'block_view', 'path_mini'); // blok met grafiekje over bezoekers voor deze pagina
+  $ga_block_page = $ga_block_content['subject'] . $ga_block_page['content'];
+  $ga_block_site = module_invoke('google_analytics_reports', 'block_view', 'dashboard'); // blok met grafiekje over bezoekers op de site
+  $ga_block_site = $ga_block_site['subject'] . $ga_block_site['content'];
+
+  // nazien of we een node aan het bekijken zijn of iets anders
+  if(arg(0) == 'node' && is_numeric(arg(1))) {
+    $node = node_load(arg(1));
+    $new_tabs = array('edit', 'page_info', 'site_admin', 'node_info', 'civi_info');
+  }
+  else {
+    $new_tabs = array('page_info', 'site_admin', 'civi_info');
+  }
+
+  // aanmaken van de tabs en de nodige data voor de content dat we aan het bekijken zijn (node, taxonomie, view, ...)
+  $new_tabs_content = '<div class="twompact_adminbar_tabs"><ul class="nav nav-tabs" role="tablist">'; // open twompact_custom_tabs div
+  $admin_blok_content = '<div class="twompact_adminbar_admin_data">'; // open twompact_custom_admin_data div
+  //
+  // kijken of we een edit tab moeten toevoegen
+  if(in_array('edit', $new_tabs)) {
+    if(arg(0) == 'node' && is_numeric(arg(1))) {
+      $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="/node/' . $node->nid . '/edit" class="edit_toggle">' . t('Edit') . '</a></li>';
+    }
+  }
+
+  // kijken of we een page_info tab moeten toevoegen
+  if(in_array('page_info', $new_tabs)) {
+    $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="javascript:;" class="page_info_toggle">' . t('Page info') . '</a></li>';
+
+    // we tonen wat informatie over de node en de auteur
+    if(arg(0) == 'node') {
+      $node = node_load(arg(1));
+      $user = user_load($node->uid);
+      $content_type = $content_types[$node->type]->name;
+
+      $node_user_info_label = t('Node and user information');
+      $node_user_info_uitleg = t('Here you can find some information about the current node and the user who created this node.');
+      $auteur_label = t('Author');
+      $aangemaakt_door_label = t('Created by');
+      $aangemaakt_op_label = t('Created on');
+      $gewijzigd_op_label = t('Changed on');
+      $type_node_label = t('Type of node');
+
+      $user_naam = $user->uid == 0 ? '2Mpact' : $user->name;
+      $node_aanmaakdatum = format_date($node->created, 'custom', 'l j F Y');
+      $node_bewerkdatum = format_date($node->changed, 'custom', 'l j F Y');
+
+      $page_user = $aangemaakt_door_label . ' ' . $user_naam;
+      $page_aanmaakdatum = $aangemaakt_op_label . ' ' . $node_aanmaakdatum;
+
+      // we kijken of de wijzigingsdatum hetzelfde is als de aanmaakdatum, zoja moeten we niet printen dat de laatste
+      // wijzigingsdatum hetzelfde is als de aanmaakdatum, we printen gewoon 'Nog niet aangepast'.
+      if($node_aanmaakdatum == $node_bewerkdatum) {
+        $page_bewerkdatum = t('Has not been edited yet');
+      }
+      else {
+        $page_bewerkdatum = $gewijzigd_op_label . ' ' . $node_bewerkdatum;
+      }
+
+      $page_type = $type_node_label . ': ' . $content_type;
+
+      $user_node_info =<<<STR
+<div id="admin_blok_node_user_info" class="panel panel-default">
+  <div class="panel-heading"><span class="glyphicon glyphicon-th-list"></span> $node_user_info_label</div>
+  <div class="panel-body">
+    $node_user_info_uitleg
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item"><span class="glyphicon glyphicon-user"></span> $page_user</li>
+    <li class="list-group-item"><span class="glyphicon glyphicon-calendar"></span> $page_aanmaakdatum</li>
+    <li class="list-group-item"><span class="glyphicon glyphicon-calendar"></span> $page_bewerkdatum</li>
+    <li class="list-group-item"><span class="glyphicon glyphicon-tag"></span> $page_type</li>
+  </ul>
+</div>
+STR;
+    }
+    else {
+      /**
+       * @todo
+       *
+       * toevoegen van logica die bepaalt welk type content we aan het bekijken zijn (taxonomie, view, ...) en voor
+       * die content wat bijkomende informatie toont (beschrijving, titels, aanmakers, ...)
+       */
+    }
+
+    $admin_blok_content .=<<<STR
+<div id="twompact_adminbar_page_info" class="twompact_adminbar_tab_data" style="display:none;">
+  <div id="twompact_adminbar_page_info_left" class="col-sm-6">$ga_block_page</div>
+  <div id="twompact_adminbar_page_info_right" class="col-sm-6">$user_node_info</div>
+</div>
+STR;
+  }
+
+  // kijken of we een site admin tab moeten toevoegen
+  if(in_array('site_admin', $new_tabs)) {
+    // tab toevoegen
+    $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="javascript:;" class="site_admin_toggle">' . t('Administer site') . '</a></li>';
+
+    // data toevoegen
+    $inhoud_label = t('Content');
+    $media_label = t('Media');
+    $nieuw_label = t('New');
+    $user_label = t('Users');
+    $queue_label = t('Widgets');
+    $settings_label = t('Settings');
+    $menu_label = t('Menus');
+    $taxonomie_label = t('Taxonomy');
+
+    // we maken een blokje met links om een nieuwe node aan te maken, enkel node types die de ingelogde gebruiker mag
+    // aanmaken natuurlijk
+    // controleren of we inhoud hebben
+    if(!empty($content_types) && is_array($content_types)) {
+      // node types output starten
+      $node_types = '<div class="btn-group">';
+
+      // deze boolean gaan we gebruiken om een nieuwe button groep te vormen, een button groep zal 4 links bevatten
+      $new_group = FALSE;
+      $teller = 1;
+
+      // loopen door de opgehaalde content types
+      foreach($content_types as $ct_tag => $ct_values) {
+        if($new_group) {
+          $node_types .= '</div><br /><div class="btn-group">';
+          $new_group = FALSE;
+        }
+
+        // controleren of ingelogde gebruiker nodes van dit type mag aanmaken
+        if(user_access('create ' . $ct_tag . ' content')) {
+          // link toevoegen naar het aanmaakformulier voor dat type node
+          $node_types .= '<li class="node_add_link"><a href="/node/add/' . str_replace('_', '-', $ct_tag) . '" class="btn">' . $ct_values->name . '</a></li>';
+
+          if($teller % 4 == 0) {
+            $new_group = TRUE;
+          }
+
+          $teller++;
+        }
+      }
+
+      // node types output stopt hier
+      $node_types .= '</div>';
+    }
+
+    // we maken een div aan met daarin de links naar de 2 widget nodequeues zodat er gemakkelijk naar daar kan gegaan
+    // worden
+    $queue_admin_link = '';
+    $queue_admin_content = '';
+    if(user_access('manipulate all queues')) {
+      //$node_queues = nodequeue_get_all_queues();
+
+      $sql = db_select('nodequeue_queue', 'nq')
+          ->fields('nq', array('qid', 'title'));
+
+      $node_queues = $sql->execute();
+      $node_queues = $node_queues->fetchAllKeyed();
+
+      if(!empty($node_queues) && is_array($node_queues)) {
+        $queue_admin_link =<<<STR
+<li id="admin_blok_widget_link"><a href="javascript:;" style="text-decoration:none;" class="btn">
+  <span class="glyphicon glyphicon-th"></span>
+  $queue_label
+</a></li>
+STR;
+
+        foreach($node_queues as $qid => $queue_title) {
+          $queue_links .= '<li class="node_add_link"><a href="http://' . $_SERVER['HTTP_HOST'] . '/admin/structure/nodequeue/' . $qid . '" class="btn">' . $queue_title . '</a></li>';
+        }
+
+        $queue_admin_content =<<<STR
+<div id="admin_blok_widget_queues" class="btn-group" style="display:none; background-color:#eee;">
+  <ul class="node_add_links">
+    $queue_links
+  </ul>
+</div>
+STR;
+      }
+    }
+
+    // we maken een aantal links aan die naar de standaard menus verwijzen
+    $func_nav_label = t('Functional navigation');
+    $hoofd_nav_label = t('Main navigation');
+    $footer_nav_label = t('Footer navigation');
+    $menus =<<<STR
+<div id="admin_blok_menus" class="btn-group" style="display:none; background-color:#eee;">
+  <a href="/admin/structure/menu/manage/menu-functionele-navigatie" class="btn">$func_nav_label</a>
+  <a href="/admin/structure/menu/manage/menu-hoofd-navigatie" class="btn">$hoofd_nav_label</a>
+  <a href="/admin/structure/menu/manage/menu-functionele-navigatie" class="btn">$footer_nav_label</a>
+</div>
+STR;
+
+    $admin_blok_content .=<<<STR
+<div id="twompact_adminbar_site_admin" class="twompact_adminbar_tab_data" style="display:none;">
+  <div class="twompact_adminbar_site_admin_left col-sm-8">
+    <ul class="nav nav-pills">
+      <li id="admin_blok_nieuw_link"><a href="javascript:;" style="text-decoration:none;" class="btn">
+        <span class="glyphicon glyphicon-plus"></span>
+        $nieuw_label
+      </a></li>
+      <li><a href="/admin/content" style="text-decoration:none;" class="btn">
+        <span class="glyphicon glyphicon-list"></span>
+        $inhoud_label
+      </a></li>
+      <li><a href="/admin/structure/taxonomy" style="text-decoration:none;" class="btn">
+        <span class="glyphicon glyphicon-list"></span>
+        $taxonomie_label
+      </a></li>
+      <li id="admin_blok_menu_link"><a href="javascript:;" style="text-decoration:none;" class="btn">
+        <span class="glyphicon glyphicon-tasks"></span>
+        $menu_label
+      </a></li>
+      <li><a href="/admin/content/file" style="text-decoration:none;" class="btn">
+        <span class="glyphicon glyphicon-file"></span>
+        $media_label
+      </a></li>
+      <li><a href="/admin/people" style="text-decoration:none;" class="btn">
+        <span class="glyphicon glyphicon-user"></span>
+        $user_label
+      </a></li>
+      $queue_admin_link
+      <li><a href="/admin/config/2mpact/settings" style="text-decoration:none;" class="btn">
+        <span class="glyphicon glyphicon-wrench"></span>
+        $settings_label
+      </a></li>
+    </ul>
+    <div id="admin_blok_nodetypes" style="display:none; background-color:#eee;">
+      <ul class="node_add_links">
+        $node_types
+      </ul>
+    </div>
+    $menus
+    $queue_admin_content
+  </div>
+  <div class="twompact_adminbar_admin_right col-sm-4">
+    $ga_block_site
+  </div>
+</div>
+STR;
+  }
+  // kijken of we een node info tab moeten toevoegen
+  if(in_array('node_info', $new_tabs)) {
+    $node_author = user_load($node->uid);
+    $node_aanmaakdatum = format_date($node->created, 'custom', 'd.m.Y');
+    $afmelden_label = t('Log out');
+    $new_tabs_content .=<<<STR
+<li class="twompact_adminbar_tab right">
+  <span class="twompact_adminbar_node_type twompact_adminbar_node_info"><span class="glyphicon glyphicon-tag"></span> {$content_types[$node->type]->name}</span>
+  <span class="twompact_adminbar_node_author twompact_adminbar_node_info"><span class="glyphicon glyphicon-user"></span> {$node_author->name}</span>
+  <span class="twompact_adminbar_node_created twompact_adminbar_node_info"><span class="glyphicon glyphicon-calendar"></span> $node_aanmaakdatum</span>
+  <a href="/user/logout" title="$afmelden_label"><span class="glyphicon glyphicon-log-out"> </span></a>
+</li>
+STR;
+  }
+
+  // kijken of we een civi tab moeten toevoegen
+  if(in_array('civi_info', $new_tabs)) {
+    if(module_exists('civicrm')) {
+      // tab toevoegen
+      $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="javascript:;" class="civi_info_toggle">CiviCRM</a></li>';
+      $admin_blok_content .=<<<STR
+<div id="twompact_adminbar_civi_info" class="twompact_custom_tab_data" style="display:none;">
+  <p>Hello world.</p>
+</div>
+STR;
+    }
+  }
+
+  $new_tabs_content .= '</ul></div>'; // close twompact_custom_tabs div
+  $admin_blok_content .= '</div>'; // close twompact_custom_admin_data div
+
+  $result =<<<STR
+<div class="twompact_adminbar_admin_blok">
+  $new_tabs_content
+  $admin_blok_content
+</div>
+STR;
+
+  /*
+  // ophalen van de lokale menu tasks (Weergeven, Bewerken, ...) om ze te kunnen weergeven
+  $prim_tabs = menu_local_tasks();
+
+  // controleren of we inhoud hebben
+  if(!empty($prim_tabs) && is_array($prim_tabs)) {
+    // de inhoud die we nodig hebben zit dieper in de array
+    $prim_tabs = $prim_tabs['tabs']['output'];
+
+    // controleren of we inhoud hebben na we een paar niveaus dieper gegaan zijn in de array
+    if(!empty($prim_tabs) && is_array($prim_tabs)) {
+      // tabs output starten
+      $tabs = '<ul class="nav nav-tabs">';
+
+      // elke tab die we vinden, voegen we hier toe
+      foreach($prim_tabs as $tmp => $tab) {
+        $tabs .= '<li><a href="' . $tab['#link']['href'] . '">' . $tab['#link']['title'] . '</a></li>';
+      }
+
+      // tabs output stopt hier
+      $tabs .= '</ul>';
+    }
+  }*/
+
+  return $result;
+}
+
+function twompact_adminbar_theme($existing, $type, $theme, $path) {
+  $items['twompact_adminbar'] = array(
+    'render element' => 'twompact_adminbar',
+    'template' => 'twompact_adminbar',
+    'path' => drupal_get_path('module', 'twompact_adminbar'),
+  );
+
+  return $items;
+}
