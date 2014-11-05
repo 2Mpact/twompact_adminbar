@@ -1,5 +1,5 @@
 name = twompact_adminbar
-description = Custom adminbar on drupal 7 (by 2Mpact)
+description = Custom adminbar on drupal 7 (by 2Mpact) & CiviCRM
 core = 7.x
 package = 2Mpact
 
