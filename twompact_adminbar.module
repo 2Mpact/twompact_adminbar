@@ -181,6 +181,7 @@ STR;
     // worden
     $queue_admin_link = '';
     $queue_admin_content = '';
+    $queue_links = '';
     if(user_access('manipulate all queues')) {
       //$node_queues = nodequeue_get_all_queues();
 
