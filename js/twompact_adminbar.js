@@ -7,16 +7,12 @@
             $('.edit_toggle').click(function() {
               $('.twompact_adminbar_tab_data').css('display', 'none');
               $('.twompact_adminbar_tab').removeClass('active');
-              if($('.edit_toggle').parent('li').hasClass('active')) {
-                $('.edit_toggle').parent('li').removeClass('active');
-              }
-              else {
-                $('.edit_toggle').parent('li').addClass('active');
-              }
             });
 
             $('.page_info_toggle').click(function() {
               $('.twompact_adminbar_tab_data').css('display', 'none');
+              $('.site_admin_toggle').parent('li').removeClass('active');
+              $('.edit_toggle').parent('li').removeClass('active');
               if($('.page_info_toggle').parent('li').hasClass('active')) {
                 $('.page_info_toggle').parent('li').removeClass('active');
                 $('#twompact_adminbar_page_info').hide('slow');
@@ -29,6 +25,8 @@
 
             $('.site_admin_toggle').click(function() {
               $('.twompact_adminbar_tab_data').css('display', 'none');
+              $('.page_info_toggle').parent('li').removeClass('active');
+              $('.edit_toggle').parent('li').removeClass('active');
               if($('.site_admin_toggle').parent('li').hasClass('active')) {
                 console.log('foo');
                 $('.site_admin_toggle').parent('li').removeClass('active');
