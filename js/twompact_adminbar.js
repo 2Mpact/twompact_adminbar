@@ -16,27 +16,29 @@
             });
 
             $('.page_info_toggle').click(function() {
-              $('.twompact_adminbar_tab').removeClass('active');
+              $('.twompact_adminbar_tab_data').css('display', 'none');
               if($('.page_info_toggle').parent('li').hasClass('active')) {
                 $('.page_info_toggle').parent('li').removeClass('active');
+                $('#twompact_adminbar_page_info').hide('slow');
               }
               else {
                 $('.page_info_toggle').parent('li').addClass('active');
+                $('#twompact_adminbar_page_info').show('slow');
               }
-              $('.twompact_adminbar_tab_data').css('display', 'none');
-              $('#twompact_adminbar_page_info').toggle('slow');
             });
 
             $('.site_admin_toggle').click(function() {
-              $('.twompact_adminbar_tab').removeClass('active');
+              $('.twompact_adminbar_tab_data').css('display', 'none');
               if($('.site_admin_toggle').parent('li').hasClass('active')) {
+                console.log('foo');
                 $('.site_admin_toggle').parent('li').removeClass('active');
+                $('#twompact_adminbar_site_admin').hide('slow');
               }
               else {
+                console.log('bar');
                 $('.site_admin_toggle').parent('li').addClass('active');
+                $('#twompact_adminbar_site_admin').show('slow');
               }
-              $('.twompact_adminbar_tab_data').css('display', 'none');
-              $('#twompact_adminbar_site_admin').toggle('slow');
             });
 
             $('#admin_blok_nieuw_link').click(function() {

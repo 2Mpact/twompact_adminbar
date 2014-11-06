@@ -218,14 +218,16 @@ STR;
     $footer_nav_label = t('Footer navigation');
     $menus =<<<STR
 <div id="admin_blok_menus" class="btn-group" style="display:none; background-color:#eee;">
-  <a href="/admin/structure/menu/manage/menu-functionele-navigatie" class="btn">$func_nav_label</a>
-  <a href="/admin/structure/menu/manage/menu-hoofd-navigatie" class="btn">$hoofd_nav_label</a>
-  <a href="/admin/structure/menu/manage/menu-functionele-navigatie" class="btn">$footer_nav_label</a>
+  <ul class="node_add_links">
+    <li class="node_add_link"><a href="/admin/structure/menu/manage/menu-functionele-navigatie" class="btn">$func_nav_label</a></li>
+    <li class="node_add_link"><a href="/admin/structure/menu/manage/menu-hoofd-navigatie" class="btn">$hoofd_nav_label</a></li>
+    <li class="node_add_link"><a href="/admin/structure/menu/manage/menu-functionele-navigatie" class="btn">$footer_nav_label</a></li>
+  <ul>
 </div>
 STR;
 
     $admin_blok_content .=<<<STR
-<div id="twompact_adminbar_site_admin" class="twompact_adminbar_tab_data" style="display:none;">
+<div id="twompact_adminbar_site_admin" class="twompact_adminbar_tab_data clearfix" style="display:none;">
   <div class="twompact_adminbar_site_admin_left col-sm-8">
     <ul class="nav nav-pills">
       <li id="admin_blok_nieuw_link"><a href="javascript:;" style="text-decoration:none;" class="btn">
@@ -304,7 +306,7 @@ STR;
   $admin_blok_content .= '</div>'; // close twompact_custom_admin_data div
 
   $result =<<<STR
-<div class="twompact_adminbar_admin_blok">
+<div class="twompact_adminbar_admin_blok clearfix">
   $new_tabs_content
   $admin_blok_content
 </div>
