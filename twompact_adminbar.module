@@ -35,7 +35,7 @@ function twompact_adminbar_admin_blok() {
   // init
   $content_types = node_type_get_types(); // array met alle gegevens van de content types
   $ga_block_page = module_invoke('google_analytics_reports', 'block_view', 'path_mini'); // blok met grafiekje over bezoekers voor deze pagina
-  $ga_block_page = $ga_block_content['subject'] . $ga_block_page['content'];
+  $ga_block_page = $ga_block_page['subject'] . $ga_block_page['content'];
   $ga_block_site = module_invoke('google_analytics_reports', 'block_view', 'dashboard'); // blok met grafiekje over bezoekers op de site
   $ga_block_site = $ga_block_site['subject'] . $ga_block_site['content'];
 
