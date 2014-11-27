@@ -182,5 +182,9 @@ li.node_add_link a {
 	line-height: 20px;
 	color: #003333;
 }
+
+ul.nav.nav-tabs li a {
+    padding: 10px 20px;
+}
 /** EINDE ADMIN BLOK CSS **/
 
