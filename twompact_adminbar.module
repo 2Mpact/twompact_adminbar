@@ -34,10 +34,16 @@ function twompact_adminbar_block_view($delta = '') {
 function twompact_adminbar_admin_blok() {
   // init
   $content_types = node_type_get_types(); // array met alle gegevens van de content types
-  $ga_block_page = module_invoke('google_analytics_reports', 'block_view', 'path_mini'); // blok met grafiekje over bezoekers voor deze pagina
-  $ga_block_page = $ga_block_page['subject'] . $ga_block_page['content'];
-  $ga_block_site = module_invoke('google_analytics_reports', 'block_view', 'dashboard'); // blok met grafiekje over bezoekers op de site
-  $ga_block_site = $ga_block_site['subject'] . $ga_block_site['content'];
+  if(variable_get('googleanalytics_account', NULL) != NULL) {
+    $ga_block_page = module_invoke('google_analytics_reports', 'block_view', 'path_mini'); // blok met grafiekje over bezoekers voor deze pagina
+    $ga_block_page = $ga_block_page['subject'] . $ga_block_page['content'];
+    $ga_block_site = module_invoke('google_analytics_reports', 'block_view', 'dashboard'); // blok met grafiekje over bezoekers op de site
+    $ga_block_site = $ga_block_site['subject'] . $ga_block_site['content'];
+  }
+  else {
+    $ga_block_page = t('No Google Analytics account has been configured.');
+    $ga_block_site = t('No Google Analytics account has been configured.');
+  }
 
   // nazien of we een node aan het bekijken zijn of iets anders
   if(arg(0) == 'node' && is_numeric(arg(1))) {
@@ -65,6 +71,7 @@ function twompact_adminbar_admin_blok() {
 
     // we tonen wat informatie over de node en de auteur
     if(arg(0) == 'node') {
+      $user_node_info = '';
       $node = node_load(arg(1));
       $user = user_load($node->uid);
       $content_type = $content_types[$node->type]->name;
