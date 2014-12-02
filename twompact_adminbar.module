@@ -118,6 +118,7 @@ function twompact_adminbar_admin_blok() {
 STR;
     }
     else {
+      $user_node_info = '';
       /**
        * @todo
        *
