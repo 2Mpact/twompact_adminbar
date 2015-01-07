@@ -302,12 +302,7 @@ STR;
   if(in_array('civi_info', $new_tabs)) {
     if(module_exists('civicrm')) {
       // tab toevoegen
-      $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="javascript:;" class="civi_info_toggle">CiviCRM</a></li>';
-      $admin_blok_content .=<<<STR
-<div id="twompact_adminbar_civi_info" class="twompact_custom_tab_data" style="display:none;">
-  <p>Hello world.</p>
-</div>
-STR;
+      $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="/civicrm?reset=1" class="civi_info_toggle">CiviCRM</a></li>';
     }
   }
 
