@@ -1,0 +1,133 @@
+# $Id$
+#
+# Dutch translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  twompact_adminbar.module: n/a
+#  twompact_adminbar.info: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2015-01-29 17:56+0100\n"
+"PO-Revision-Date: 2015-01-29 17:58+0100\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Dutch <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Language: nl\n"
+"X-Generator: Poedit 1.6.10\n"
+
+#: twompact_adminbar.module:44;45
+msgid "No Google Analytics account has been configured."
+msgstr "Er is nog geen Google Analytics account ingesteld."
+
+#: twompact_adminbar.module:64
+msgid "Edit"
+msgstr "Bewerken"
+
+#: twompact_adminbar.module:70
+msgid "Page info"
+msgstr "Pagina info"
+
+#: twompact_adminbar.module:79
+msgid "Node and user information"
+msgstr "Node en gebruiker informatie"
+
+#: twompact_adminbar.module:80
+msgid ""
+"Here you can find some information about the current node and the user who "
+"created this node."
+msgstr ""
+"Hier kan je informatie vinden over de huidige node en de gebruiker die de "
+"node heeft aangemaakt."
+
+#: twompact_adminbar.module:81
+msgid "Author"
+msgstr "Auteur"
+
+#: twompact_adminbar.module:82
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#: twompact_adminbar.module:83
+msgid "Created on"
+msgstr "Aangemaakt op"
+
+#: twompact_adminbar.module:84
+msgid "Changed on"
+msgstr "Bijgestuurd op"
+
+#: twompact_adminbar.module:85
+msgid "Type of node"
+msgstr "Type node"
+
+#: twompact_adminbar.module:97
+msgid "Has not been edited yet"
+msgstr "Is nog niet geëditeerd"
+
+#: twompact_adminbar.module:141
+msgid "Administer site"
+msgstr "Site beheren"
+
+#: twompact_adminbar.module:144
+msgid "Content"
+msgstr "Inhoud"
+
+#: twompact_adminbar.module:145
+msgid "Media"
+msgstr "Media"
+
+#: twompact_adminbar.module:146
+msgid "New"
+msgstr "Nieuw"
+
+#: twompact_adminbar.module:147
+msgid "Users"
+msgstr "Gebruikers"
+
+#: twompact_adminbar.module:148
+msgid "Widgets"
+msgstr "Widgets"
+
+#: twompact_adminbar.module:149
+msgid "Settings"
+msgstr "Instellingen"
+
+#: twompact_adminbar.module:150
+msgid "Menus"
+msgstr "Menus"
+
+#: twompact_adminbar.module:151
+msgid "Taxonomy"
+msgstr "Taxonomie"
+
+#: twompact_adminbar.module:225
+msgid "Functional navigation"
+msgstr "Functionele navigatie"
+
+#: twompact_adminbar.module:226
+msgid "Main navigation"
+msgstr "Hoofdnavigatie"
+
+#: twompact_adminbar.module:227
+msgid "Footer navigation"
+msgstr "Voetnavigatie"
+
+#: twompact_adminbar.module:290
+msgid "Log out"
+msgstr "Afmelden"
+
+#: twompact_adminbar.info:0
+msgid "twompact_adminbar"
+msgstr "twompact_adminbar"
+
+#: twompact_adminbar.info:0
+msgid "Custom adminbar on drupal 7 (by 2Mpact)"
+msgstr "Aangepaste adminbar op Drupal 7"
+
+#: twompact_adminbar.info:0
+msgid "2Mpact"
+msgstr "2Mpact"
