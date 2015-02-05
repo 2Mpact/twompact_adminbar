@@ -149,6 +149,7 @@ STR;
     $settings_label = t('Settings');
     $menu_label = t('Menus');
     $taxonomie_label = t('Taxonomy');
+    $newsletter_label = t('Newsletter');
 
     // we maken een blokje met links om een nieuwe node aan te maken, enkel node types die de ingelogde gebruiker mag
     // aanmaken natuurlijk
@@ -267,6 +268,10 @@ STR;
       <li><a href="/admin/config/2mpact/settings" style="text-decoration:none;" class="btn">
         <span class="glyphicon glyphicon-wrench"></span>
         $settings_label
+      </a></li>
+      <li><a href="/admin/config/2mpact/blijfopdehoogte" style="text-decoration:none;" class="btn">
+        <span class="glyphicon glyphicon-envelope"></span>
+        $newsletter_label
       </a></li>
     </ul>
     <div id="admin_blok_nodetypes" style="display:none; background-color:#eee;">
