@@ -231,7 +231,7 @@ STR;
   <ul class="node_add_links">
     <li class="node_add_link"><a href="/admin/structure/menu/manage/menu-functionele-navigatie" class="btn">$func_nav_label</a></li>
     <li class="node_add_link"><a href="/admin/structure/menu/manage/menu-hoofd-navigatie" class="btn">$hoofd_nav_label</a></li>
-    <li class="node_add_link"><a href="/admin/structure/menu/manage/menu-functionele-navigatie" class="btn">$footer_nav_label</a></li>
+    <li class="node_add_link"><a href="/admin/structure/menu/manage/menu-footer-navigatie" class="btn">$footer_nav_label</a></li>
   <ul>
 </div>
 STR;
