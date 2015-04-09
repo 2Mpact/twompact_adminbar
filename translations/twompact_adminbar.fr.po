@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-01-29 17:58+0100\n"
-"PO-Revision-Date: 2015-01-29 18:31+0100\n"
+"POT-Creation-Date: 2015-04-08 13:29+0200\n"
+"PO-Revision-Date: 2015-04-08 13:29+0100\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: French <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -18,105 +18,111 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>1);\n"
 "Language: fr\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.7.4\n"
 
 #: twompact_adminbar.module:44;45
 msgid "No Google Analytics account has been configured."
 msgstr "Pas de compte Google Analytics a été configuré."
 
-#: twompact_adminbar.module:64
+#: twompact_adminbar.module:71
 msgid "Edit"
 msgstr "Editer"
 
-#: twompact_adminbar.module:70
+#: twompact_adminbar.module:74
+msgid "Edit this landing page"
+msgstr "Modifier cette page d'atterrissage"
+
+#: twompact_adminbar.module:80
 msgid "Page info"
 msgstr "Info sur la page"
 
-#: twompact_adminbar.module:79
+#: twompact_adminbar.module:89
 msgid "Node and user information"
 msgstr "Information sur la node et l'utilisateur"
 
-#: twompact_adminbar.module:80
-msgid ""
-"Here you can find some information about the current node and the user who "
-"created this node."
+#: twompact_adminbar.module:90
+msgid "Here you can find some information about the current node and the user who created this node."
 msgstr ""
-"Ici vous pouvez trouver quelques informations sur le nœud actuel et "
-"l'utilisateur qui a créé ce noeud."
+"Ici vous pouvez trouver quelques informations sur le nœud actuel et l'utilisateur qui a créé ce "
+"noeud."
 
-#: twompact_adminbar.module:81
+#: twompact_adminbar.module:91
 msgid "Author"
 msgstr "Auteur"
 
-#: twompact_adminbar.module:82
+#: twompact_adminbar.module:92
 msgid "Created by"
 msgstr "Créé par"
 
-#: twompact_adminbar.module:83
+#: twompact_adminbar.module:93
 msgid "Created on"
 msgstr "Créé le"
 
-#: twompact_adminbar.module:84
+#: twompact_adminbar.module:94
 msgid "Changed on"
 msgstr "Change sur"
 
-#: twompact_adminbar.module:85
+#: twompact_adminbar.module:95
 msgid "Type of node"
 msgstr "Type de node"
 
-#: twompact_adminbar.module:97
+#: twompact_adminbar.module:107
 msgid "Has not been edited yet"
 msgstr "N'a pas encore été édité"
 
-#: twompact_adminbar.module:141
+#: twompact_adminbar.module:151
 msgid "Administer site"
 msgstr "Administrer le site"
 
-#: twompact_adminbar.module:144
+#: twompact_adminbar.module:154
 msgid "Content"
 msgstr "Contenu"
 
-#: twompact_adminbar.module:145
+#: twompact_adminbar.module:155
 msgid "Media"
 msgstr "Médias"
 
-#: twompact_adminbar.module:146
+#: twompact_adminbar.module:156
 msgid "New"
 msgstr "Nouveau"
 
-#: twompact_adminbar.module:147
+#: twompact_adminbar.module:157
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: twompact_adminbar.module:148
+#: twompact_adminbar.module:158
 msgid "Widgets"
 msgstr "Widgets"
 
-#: twompact_adminbar.module:149
+#: twompact_adminbar.module:159
 msgid "Settings"
 msgstr "Paramètres"
 
-#: twompact_adminbar.module:150
+#: twompact_adminbar.module:160
 msgid "Menus"
 msgstr "Menus"
 
-#: twompact_adminbar.module:151
+#: twompact_adminbar.module:161
 msgid "Taxonomy"
 msgstr "Taxonomie"
 
-#: twompact_adminbar.module:225
+#: twompact_adminbar.module:162
+msgid "Newsletter"
+msgstr "Courriel"
+
+#: twompact_adminbar.module:236
 msgid "Functional navigation"
 msgstr "Navigation fonctionnelle"
 
-#: twompact_adminbar.module:226
+#: twompact_adminbar.module:237
 msgid "Main navigation"
 msgstr "Navigation principale"
 
-#: twompact_adminbar.module:227
+#: twompact_adminbar.module:238
 msgid "Footer navigation"
 msgstr "Pied de page navigation"
 
-#: twompact_adminbar.module:290
+#: twompact_adminbar.module:305
 msgid "Log out"
 msgstr "Déconnexion"
 
