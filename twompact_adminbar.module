@@ -70,7 +70,10 @@ function twompact_adminbar_admin_blok() {
       $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="/node/' . $node->nid . '/edit" class="edit_toggle">' . t('Edit') . '</a></li>';
     }
     elseif(!empty($router_item) && is_array($router_item) && $router_item['page_callback'] == 'page_builder_page_view') {
-      $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="/admin/page-builder/edit/1" class="edit_toggle">' . t('Edit this landing page') . '</a></li>';
+      // ID ophalen van de huidige pagebuild pagina
+      $pagebuilder_page_id = $router_item['page_arguments'][0]->id;
+      // edit link toevoegen voor de landingspagina te bewerken
+      $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="/admin/page-builder/edit/' . $pagebuilder_page_id . '" class="edit_toggle">' . t('Edit this landing page') . '</a></li>';
     }
   }
 
