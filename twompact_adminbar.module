@@ -85,7 +85,7 @@ function twompact_adminbar_admin_blok() {
     if(arg(0) == 'node') {
       $user_node_info = '';
       $node = node_load(arg(1));
-      $user = user_load($node->uid);
+      $node_user = user_load($node->uid);
       $content_type = $content_types[$node->type]->name;
 
       $node_user_info_label = t('Node and user information');
@@ -96,7 +96,7 @@ function twompact_adminbar_admin_blok() {
       $gewijzigd_op_label = t('Changed on');
       $type_node_label = t('Type of node');
 
-      $user_naam = $user->uid == 0 ? '2Mpact' : $user->name;
+      $user_naam = $node_user->uid == 0 ? '2Mpact' : $node_user->name;
       $node_aanmaakdatum = format_date($node->created, 'custom', 'l j F Y');
       $node_bewerkdatum = format_date($node->changed, 'custom', 'l j F Y');
 
