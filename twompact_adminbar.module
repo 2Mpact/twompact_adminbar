@@ -51,13 +51,13 @@ function twompact_adminbar_admin_blok() {
   // nazien of we een node aan het bekijken zijn of iets anders
   if(arg(0) == 'node' && is_numeric(arg(1))) {
     $node = node_load(arg(1));
-    $new_tabs = array('edit', 'page_info', 'site_admin', 'node_info', 'civi_info');
+    $new_tabs = array('edit', 'page_info', 'site_admin', 'node_info', 'civi_info', 'masquerade');
   }
   elseif(!empty($router_item) && is_array($router_item) && $router_item['page_callback'] == 'page_builder_page_view') {
-    $new_tabs = array('edit', 'page_info', 'site_admin', 'civi_info');
+    $new_tabs = array('edit', 'page_info', 'site_admin', 'civi_info', 'masquerade');
   }
   else {
-    $new_tabs = array('page_info', 'site_admin', 'civi_info');
+    $new_tabs = array('page_info', 'site_admin', 'civi_info', 'masquerade');
   }
 
   // aanmaken van de tabs en de nodige data voor de content dat we aan het bekijken zijn (node, taxonomie, view, ...)
@@ -67,13 +67,15 @@ function twompact_adminbar_admin_blok() {
   // kijken of we een edit tab moeten toevoegen
   if(in_array('edit', $new_tabs)) {
     if(arg(0) == 'node' && is_numeric(arg(1))) {
-      $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="/node/' . $node->nid . '/edit" class="edit_toggle">' . t('Edit') . '</a></li>';
+      $node_edit_url = url('node/' . $node->nid . '/edit');
+      $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="' . $node_edit_url . '" class="edit_toggle">' . t('Edit') . '</a></li>';
     }
     elseif(!empty($router_item) && is_array($router_item) && $router_item['page_callback'] == 'page_builder_page_view') {
       // ID ophalen van de huidige pagebuild pagina
       $pagebuilder_page_id = $router_item['page_arguments'][0]->id;
+      $pagebuilder_edit_url = url('admin/page-builder/edit/' . $pagebuilder_page_id);
       // edit link toevoegen voor de landingspagina te bewerken
-      $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="/admin/page-builder/edit/' . $pagebuilder_page_id . '" class="edit_toggle">' . t('Edit this landing page') . '</a></li>';
+      $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="' . $pagebuilder_edit_url . '" class="edit_toggle">' . t('Edit this landing page') . '</a></li>';
     }
   }
 
@@ -221,7 +223,8 @@ STR;
 STR;
 
         foreach($node_queues as $qid => $queue_title) {
-          $queue_links .= '<li class="node_add_link"><a href="http://' . $_SERVER['HTTP_HOST'] . '/admin/structure/nodequeue/' . $qid . '" class="btn">' . $queue_title . '</a></li>';
+          $nodequeue_edit_url = url('admin/structure/nodequeue/' . $qid);
+          $queue_links .= '<li class="node_add_link"><a href="' . $nodequeue_edit_url . '" class="btn">' . $queue_title . '</a></li>';
         }
 
         $queue_admin_content =<<<STR
@@ -236,17 +239,28 @@ STR;
 
     // we maken een aantal links aan die naar de standaard menus verwijzen
     $func_nav_label = t('Functional navigation');
+    $func_nav_edit_url = url('admin/structure/menu/manage/menu-functionele-navigatie');
     $hoofd_nav_label = t('Main navigation');
+    $hoofd_nav_edit_url = url('admin/structure/menu/manage/menu-hoofd-navigatie');
     $footer_nav_label = t('Footer navigation');
+    $footer_nav_edit_url = url('admin/structure/menu/manage/menu-footer-navigatie');
+
     $menus =<<<STR
 <div id="admin_blok_menus" class="btn-group" style="display:none; background-color:#eee;">
   <ul class="node_add_links">
-    <li class="node_add_link"><a href="/admin/structure/menu/manage/menu-functionele-navigatie" class="btn">$func_nav_label</a></li>
-    <li class="node_add_link"><a href="/admin/structure/menu/manage/menu-hoofd-navigatie" class="btn">$hoofd_nav_label</a></li>
-    <li class="node_add_link"><a href="/admin/structure/menu/manage/menu-footer-navigatie" class="btn">$footer_nav_label</a></li>
+    <li class="node_add_link"><a href="$func_nav_edit_url" class="btn">$func_nav_label</a></li>
+    <li class="node_add_link"><a href="$hoofd_nav_edit_url" class="btn">$hoofd_nav_label</a></li>
+    <li class="node_add_link"><a href="$footer_nav_edit_url" class="btn">$footer_nav_label</a></li>
   <ul>
 </div>
 STR;
+
+    $inhoud_url = url('admin/content');
+    $taxonomie_url = url('admin/structure/taxonomy');
+    $media_url = url('admin/content/file');
+    $user_url = url('admin/people');
+    $twompact_settings_url = url('admin/config/2mpact/settings');
+    $twompact_blijfopdehoogte_url = url('admin/config/2mpact/blijfopdehoogte');
 
     $admin_blok_content .=<<<STR
 <div id="twompact_adminbar_site_admin" class="twompact_adminbar_tab_data clearfix" style="display:none;">
@@ -256,11 +270,11 @@ STR;
         <span class="glyphicon glyphicon-plus"></span>
         $nieuw_label
       </a></li>
-      <li><a href="/admin/content" style="text-decoration:none;" class="btn">
+      <li><a href="$inhoud_url" style="text-decoration:none;" class="btn">
         <span class="glyphicon glyphicon-list"></span>
         $inhoud_label
       </a></li>
-      <li><a href="/admin/structure/taxonomy" style="text-decoration:none;" class="btn">
+      <li><a href="$taxonomie_url" style="text-decoration:none;" class="btn">
         <span class="glyphicon glyphicon-list"></span>
         $taxonomie_label
       </a></li>
@@ -268,20 +282,20 @@ STR;
         <span class="glyphicon glyphicon-tasks"></span>
         $menu_label
       </a></li>
-      <li><a href="/admin/content/file" style="text-decoration:none;" class="btn">
+      <li><a href="$media_url" style="text-decoration:none;" class="btn">
         <span class="glyphicon glyphicon-file"></span>
         $media_label
       </a></li>
-      <li><a href="/admin/people" style="text-decoration:none;" class="btn">
+      <li><a href="$user_url" style="text-decoration:none;" class="btn">
         <span class="glyphicon glyphicon-user"></span>
         $user_label
       </a></li>
       $queue_admin_link
-      <li><a href="/admin/config/2mpact/settings" style="text-decoration:none;" class="btn">
+      <li><a href="$twompact_settings_url" style="text-decoration:none;" class="btn">
         <span class="glyphicon glyphicon-wrench"></span>
         $settings_label
       </a></li>
-      <li><a href="/admin/config/2mpact/blijfopdehoogte" style="text-decoration:none;" class="btn">
+      <li><a href="$twompact_blijfopdehoogte_url" style="text-decoration:none;" class="btn">
         <span class="glyphicon glyphicon-envelope"></span>
         $newsletter_label
       </a></li>
@@ -318,16 +332,33 @@ STR;
   // kijken of we een civi tab moeten toevoegen
   if(in_array('civi_info', $new_tabs)) {
     if(module_exists('civicrm')) {
+      // url aanmaken
+      $civi_url = url('civicrm', array('query' => array('reset' => 1)));
       // tab toevoegen
-      $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="/civicrm?reset=1" class="civi_info_toggle">CiviCRM</a></li>';
+      $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="' . $civi_url . '" class="civi_info_toggle">CiviCRM</a></li>';
+    }
+  }
+
+  $masquerading = FALSE;
+  if(in_array('masquerade', $new_tabs)) {
+    if($_SESSION['masquerading']) {
+      $masquerading = TRUE;
+      $masquerade_unswitch_url = url('masquerade/unswitch', array('query' => array('token' => drupal_get_token('masquerade/unswitch'))));
+      // tab toevoegen
+      $new_tabs_content .= '<li class="twompact_adminbar_tab"><a href="' . $masquerade_unswitch_url . '" class="unmasquerade"><span class="glyphicon glyphicon-random"></span> Unmasquerade</a></li>';
     }
   }
 
   $new_tabs_content .= '</ul></div>'; // close twompact_custom_tabs div
   $admin_blok_content .= '</div>'; // close twompact_custom_admin_data div
 
+  $masquerade_class = '';
+  if($masquerading) {
+    $masquerade_class = 'masquerade';
+  }
+
   $result =<<<STR
-<div class="twompact_adminbar_admin_blok clearfix">
+<div class="twompact_adminbar_admin_blok $masquerade_class clearfix">
   $new_tabs_content
   $admin_blok_content
 </div>
